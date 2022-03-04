@@ -84,27 +84,10 @@ In this style, we will be using a structure that relies more on filtering and se
 > Using a prefix [naming convention](#asset-name-modifiers), using folders to contain assets of similar types such as `Meshes`, `Textures`, and `Materials` is a redundant practice as asset types are already both sorted by prefix as well as able to be filtered in the content browser.
 <pre>
 Assets
-    <a name="#structure-developers">_Developers</a>(Use a `_`to keep this folder at the top)
+    <a name="#structure-developers">_Dev</a>(Use a `_`to keep this folder at the top)
         DeveloperName
             (Work in progress assets)
-    <a name="structure-top-level">ProjectName</a>
-            Characters
-            	Anakin
-            FX
-                Vehicles
-                    Abilities
-                        IonCannon
-                            (Particle Systems, Textures)
-                Weapons
-            Gameplay
-                Characters
-                Equipment
-                Input
-                Vehicles
-                    Abilities
-                    Air
-                        TieFighter
-                            (Models, Textures, Materials, Prefabs)
+    <a name="structure-top-level">_Project</a>
             <a name="#structure-levels">_Levels</a>
                 Frontend
                 Act1
@@ -116,24 +99,24 @@ Assets
             MaterialLibrary
             	Debug
             	Shaders
-            Objects
-                Architecture (Single use big objects)
-                    DeathStar
-                Props (Repeating objects to fill a level)
-                    ObjectSets
-                        DeathStar
+	    Prefabs
+	    	Player
+		    .fbx
+		    .prefab
+		    .asset
+		    .mp4
+		    .cs
+		    (any other prefab specific asset)
+		NPC
+            	    Anakin
+		Objects
+		    Architecture (Single use big objects)
+                    	DeathStar
+                    Props (Repeating objects to fill a level)
+                    	ObjectSets
+                            DeathStar
             Scripts
-                AI
-                Gameplay
-                    Input
-                Tools
             Sound
-                Characters
-                Vehicles
-                    TieFighter
-                        Abilities
-                            Afterburners
-                Weapons
             UI
                 Art
                     Buttons
@@ -207,9 +190,9 @@ If you find that the content browser has an empty folder you can't delete, you s
 <a name="2.2"></a>
 <a name="structure-top-level"><a>
 ### 2.2 Use A Top Level Folder For Project Specific Assets
-All of a project's assets should exist in a folder named after the project. For example, if your project is named 'Generic Shooter', _all_ of it's content should exist in `Assets/GenericShooter`.
+All of a project's assets should exist in a folder named _Project.
 
-> The `Developers` folder is not for assets that your project relies on and therefore is not project specific. See [Developer Folders](#2.3) for details about this.
+> The `_Dev` folder is not for assets that your project relies on and therefore is not project specific. See [Developer Folders](#2.3) for details about this.
 
 There are multiple reasons for this approach.
 
