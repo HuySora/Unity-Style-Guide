@@ -1,0 +1,36 @@
+#ROOTNAMESPACEBEGIN#
+    using MyBox;
+    using UnityEngine;
+
+#if UNITY_EDITOR
+    using UnityEditor;
+
+    public partial class #SCRIPTNAME# : IPrepare
+    {
+        [ButtonMethod(ButtonMethodDrawOrder.BeforeInspector)]
+        public bool Prepare() {
+            bool wasNull = false;
+            
+            return wasNull;
+        }
+    }
+#endif
+
+    public partial class #SCRIPTNAME# : MonoBehaviour
+    {
+        // Constants
+        #region Static
+        // Delegates, Events
+        // Properties
+        // Constructor
+        // Methods
+        #endregion
+        // Delegates, Events
+        // Properties
+        // Constructor, Injection Method
+        // MonoBehaviour Callbacks
+        // Methods
+        // Types
+    }
+#ROOTNAMESPACEEND#
+
