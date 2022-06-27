@@ -363,17 +363,19 @@ Class members should be alphabetized, and grouped into sections (#region if too 
 * Constant Fields
 * Static Fields (Alphabetized and grouped into sections like instance field)
 * Delegates, Events
+* SerializeField (Inspector Exposed)
 * Properties
 * Constructors, Injection Method
 * MonoBehaviour Callbacks (Awake, OnEnable, OnDisable, OnDestroy)
 * Methods
 * Types
 
-Within each of these groups order by access:
+Within each of these groups order by access (except for property and it backing field which will grouped next to each other)
 * public
 * internal
 * protected
 * private
+
 ```cs
 namespace UnityCodingStyle {
     using System;
@@ -397,14 +399,15 @@ namespace UnityCodingStyle {
         private const string m_PrivateKey;
 
         #region Static --------------------------------------------------------------------------------------------------------
-	    /// <summary> Events should have a summary. </summary>
+	/// <summary> Events should have a summary. </summary>
         public static event Action OnLoadSequenceFinished;
         public static void Save(string fileName) { /*...*/ }
         #endregion
 
-        // Properties
+        // SerializeField (Inspector Exposed)
         [Tooltip("Inspector variables that doesn't clearly explain what it used for by it name, should have a Tooltip")]
-        [field: SerializeField] public string FileName { get; private set; }
+        [SerializeField] private string m_FileName;
+        public string FileName => m_FileName;
         [field: SerializeField] public string SavePath { get; private set; }
 
         // Constructors
