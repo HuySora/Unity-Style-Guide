@@ -361,15 +361,13 @@ Organize namespaces with a clearly defined structure,
 
 Class members should be alphabetized, and grouped into sections (#region if too big):
 * Constant Fields
-* Static Fields
-* Events / Delegates
-* Constructors
-* Fields
+* Static Fields (Alphabetized and grouped into sections like instance field)
+* Delegates, Events
 * Properties
-* LifeCycle Methods (Awake, OnEnable, OnDisable, OnDestroy)
-* Public Methods
-* Private Methods
-* Nested types
+* Constructors, Injection Method
+* MonoBehaviour Callbacks (Awake, OnEnable, OnDisable, OnDestroy)
+* Methods
+* Types
 
 Within each of these groups order by access:
 * public
@@ -409,15 +407,19 @@ namespace UnityCodingStyle {
         [field: SerializeField] public string FileName { get; private set; }
         [field: SerializeField] public string SavePath { get; private set; }
 
+        // Constructors
+	[Inject](https://github.com/modesttree/Zenject)
+        public void Construct() { /*...*/ }
+
         // MonoBehaviour Callbacks
         public Awake() { /*...*/ }
         public Update() { /*...*/ }
 
         // Methods
-        public InstanceSave() { InnerSave(FileName) }
-        private InnerSave(string fileName) { /*...*/ }
+        public Save() { SaveInternal(FileName) }
+        private SaveInternal(string fileName) { /*...*/ }
 
-        // Nested types
+        // Types
         public struct SaveData {
             // ...
         }
@@ -443,13 +445,13 @@ To create Foldout Groups there are 2 options in Unity.
 * The second option is to use the Foldout Group Attribute available with [Odin Inspector](https://odininspector.com/).
 
 ```cs
-    [Serializable](https://docs.unity3d.com/ScriptReference/Serializable.html)]
+    [Serializable] // (https://docs.unity3d.com/ScriptReference/Serializable.html)]
     public struct PlayerStats
     {
 	public int MovementSpeed;
     }
     
-    [FoldoutGroup("Interactable")]
+    [FoldoutGroup("Interactable")] // (https://odininspector.com/ ,...)
     public int MovementSpeed = 1;
 ```
 
