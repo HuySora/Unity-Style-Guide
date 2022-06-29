@@ -679,8 +679,8 @@ Bad examples:
 * `OnData`
 * `OnTarget`
 
-<a name="scripts-example"></a>
-### 3.5 Functions, Events, and Event Dispatchers
+<a name="script-example"></a>
+### 3.5 Script Example
 ```cs
 namespace UnityCodingStyle {
     using System;
