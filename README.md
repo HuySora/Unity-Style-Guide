@@ -337,7 +337,6 @@ _Dynamic
 **[⬆ Back to Top](#table-of-contents)**
 
 <a name="scripts"></a>
-
 ## 3. Scripts
 
 This section will focus on C# classes and their internals. When possible, style rules conform to Microsoft's C# standard.
@@ -351,6 +350,8 @@ This section will focus on C# classes and their internals. When possible, style 
 
 > 3.4 [Functions](#functions)
 
+> 3.5 [Example](#script-example)
+
 <a name="classorganization"></a>
 ### 3.1 Class Organization
 Source files should contain only one public type, although multiple internal classes are allowed.
@@ -361,74 +362,22 @@ Organize namespaces with a clearly defined structure,
 
 Class members should be alphabetized, and grouped into sections (#region if too big):
 * Constant Fields
-* Static Fields (Alphabetized and grouped into sections like instance field)
-* Delegates, Events
-* SerializeField (Inspector Exposed)
-* Properties
-* Constructors, Injection Method
-* MonoBehaviour Callbacks (Awake, OnEnable, OnDisable, OnDestroy)
-* Methods
-* Types
+* **Static Fields**
+    * (Alphabetized and grouped into sections like instance field)
+* Instance Fields
+    * Delegates, Events
+    * SerializeField (Inspector Exposed)
+    * Properties
+    * Constructors, Injection Method
+    * MonoBehaviour Callbacks (Awake, OnEnable, OnDisable, OnDestroy)
+    * Methods
+    * Types
 
 Within each of these groups order by access (except for property and it backing field which will grouped next to each other)
 * public
 * internal
 * protected
 * private
-
-```cs
-namespace UnityCodingStyle {
-    using System;
-    using System.Collections.Generic;
-
-#region UNITY_EDITOR
-    using UnityEditor;
-    public partial class SerializationManager {
-        /// <summary> Public accessable field, properties, event, method,.. should have 'Editor' prefix in their name. </summary>
-        public string EditorGetSaveFileEncryptKey(string fileName) { /*...*/ }
-
-        private void OnValidate() { /*...*/ }
-        private void OnDrawGizmos() { /*...*/ }
-    }
-#endregion
-
-    /// <summary> Brief summary of what the class does. </summary>
-    public partial class SerializationManager : MonoBehaviour {
-        /// <summary> Fields/properties that doesn't clearly explain by it name what it used for or does, should have a summary. </summary>
-        public const string PublicKey;
-        private const string m_PrivateKey;
-
-        #region Static --------------------------------------------------------------------------------------------------------
-	/// <summary> Events should have a summary. </summary>
-        public static event Action OnLoadSequenceFinished;
-        public static void Save(string fileName) { /*...*/ }
-        #endregion
-
-        // SerializeField (Inspector Exposed)
-        [Tooltip("Inspector variables that doesn't clearly explain what it used for by it name, should have a Tooltip")]
-        [SerializeField] private string m_FileName;
-        public string FileName => m_FileName;
-        [field: SerializeField] public string SavePath { get; private set; }
-
-        // Constructors
-	[Inject](https://github.com/modesttree/Zenject)
-        public void Construct() { /*...*/ }
-
-        // MonoBehaviour Callbacks
-        public Awake() { /*...*/ }
-        public Update() { /*...*/ }
-
-        // Methods
-        public Save() { SaveInternal(FileName) }
-        private SaveInternal(string fileName) { /*...*/ }
-
-        // Types
-        public struct SaveData {
-            // ...
-        }
-    }
-}
-```
 
 #### Script Templates
 To save some time you can overwrite Unity's default script template with your own  to automatically setup the namespace and regions etc. See this Unity [support](https://support.unity3d.com/hc/en-us/articles/210223733-How-to-customize-Unity-script-templates) article to learn how.
@@ -729,6 +678,62 @@ Bad examples:
 
 * `OnData`
 * `OnTarget`
+
+<a name="scripts-example"></a>
+### 3.5 Functions, Events, and Event Dispatchers
+```cs
+namespace UnityCodingStyle {
+    using System;
+    using System.Collections.Generic;
+
+#region UNITY_EDITOR
+    using UnityEditor;
+    public partial class SerializationManager {
+        /// <summary> Public accessable (editor only) field, properties, event, method,.. should have 'Editor' prefix in their name. </summary>
+        public string Editor_GetSaveFileEncryptKey(string fileName) { /*...*/ }
+
+        private void OnValidate() { /*...*/ }
+        private void OnDrawGizmos() { /*...*/ }
+    }
+#endregion
+
+    /// <summary> Brief summary of what the class does. </summary>
+    public partial class SerializationManager : MonoBehaviour {
+        /// <summary> Fields/properties that doesn't clearly explain by it name what it used for or does, should have a summary. </summary>
+        public const string PublicKey = "My Public Key";
+        private const string m_PrivateKey = "My Private Key";
+
+        #region Static --------------------------------------------------------------------------------------------------------
+	    /// <summary> Events should have a summary. </summary>
+        public static event Action OnLoadSequenceFinished;
+        public static void Save(string fileName) { /*...*/ }
+        #endregion
+
+        // SerializeField (Inspector Exposed)
+        [Tooltip("Inspector variables that doesn't clearly explain what it used for by it name, should have a Tooltip")]
+        [SerializeField] private string m_FileName;
+        public string FileName => m_FileName;
+        [field: SerializeField] public string SavePath { get; private set; }
+
+        // Constructors
+	    [Inject](https://github.com/modesttree/Zenject)
+        public void Construct() { /*...*/ }
+
+        // MonoBehaviour Callbacks
+        public Awake() { /*...*/ }
+        public Update() { /*...*/ }
+
+        // Methods
+        public Save() { Save_Internal(FileName) }
+        private Save_Internal(string fileName) { /*...*/ }
+
+        // Types
+        public struct SaveData {
+            // ...
+        }
+    }
+}
+```
 
 **[⬆ Back to Top](#table-of-contents)**
 <a name="anc"></a>
