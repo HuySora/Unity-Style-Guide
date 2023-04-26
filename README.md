@@ -466,7 +466,7 @@ All variables use PascalCase: `public const string PublicKey = "My Public Key";`
 
 [private](#privatevariables) which use m_PascalCase: `private const string m_PrivateKey = "My Private Key";`
 
-Use PascalCase for abbreviations of 4 characters or more (3 chars are both uppercase).
+Use PascalCase for abbreviations
 
 ##### Considered Context
 All variable names must not be redundant with their context as all variable references in the class will always have context.
