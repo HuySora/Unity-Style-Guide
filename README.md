@@ -460,7 +460,7 @@ The words `variable` and `property` may be used interchangeably.
 All non-boolean variable names must be clear, unambiguous, and descriptive nouns.
 
 ##### Case
-All variables use PascalCase unless they are: `public const string PublicKey = "My Public Key";`
+All variables use PascalCase: `public const string PublicKey = "My Public Key";`, unless they are: 
         
 [local](#localvariables) which use camelCase: `string responsePublicKey;`
 
