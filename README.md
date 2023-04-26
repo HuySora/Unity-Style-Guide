@@ -360,9 +360,7 @@ This section will focus on C# classes and their internals. When possible, style 
 ### 3.1 Class Organization
 Source files should contain only one public type, although multiple internal classes are allowed.
 
-Source files should be given the name of the public class in the file.
-
-Organize namespaces with a clearly defined structure,
+Source files should reflect the name of the public type in the file.
 
 Class members should be alphabetized, and grouped into sections (#region if too big):
 * Constant Fields
@@ -373,7 +371,7 @@ Class members should be alphabetized, and grouped into sections (#region if too 
     * SerializeField (Inspector Exposed)
     * Properties
     * Constructors, Injection Method
-    * MonoBehaviour Callbacks (Awake, OnEnable, OnDisable, OnDestroy)
+    * MonoBehaviour’s Life-cycle Method (Awake, OnEnable, OnDisable, OnDestroy)
     * Methods
     * Types
 
@@ -389,6 +387,8 @@ To save some time you can overwrite Unity's default script template with your ow
 <a name="namespace"></a>
 #### Namespace
 Use a namespace to ensure your scoping of classes/enum/interface/etc won't conflict with existing ones from other namespaces or the global namespace. The project should at minimum use the projects name for the Namespace to prevent conflicts with any imported Third Party assets.
+
+Organize namespaces with a clearly defined structure
 
 #### Foldout Groups
 If a class has only a small number of variables, Foldout Groups are not required.
