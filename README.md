@@ -712,7 +712,7 @@ namespace UnityCodingStyle {
         private const string m_PrivateKey = "My Private Key";
 
         #region Static --------------------------------------------------------------------------------------------------------
-	    /// <summary> Events should have a summary. </summary>
+	/// <summary> Events should have a summary. </summary>
         public static event Action OnLoadSequenceFinished;
         public static void Save(string fileName) { /*...*/ }
         #endregion
@@ -724,7 +724,7 @@ namespace UnityCodingStyle {
         [field: SerializeField] public string SavePath { get; private set; }
 
         // Constructors
-	    [Inject](https://github.com/modesttree/Zenject)
+	[Inject](https://github.com/modesttree/Zenject)
         public void Construct() { /*...*/ }
 
         // MonoBehaviour Callbacks
