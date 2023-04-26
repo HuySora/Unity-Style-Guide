@@ -727,7 +727,7 @@ namespace UnityCodingStyle {
 	[Inject](https://github.com/modesttree/Zenject)
         public void Construct() { /*...*/ }
 
-        // MonoBehaviour Callbacks
+        // MonoBehaviour’s Life-cycle Method
         public Awake() { /*...*/ }
         public Update() { /*...*/ }
 
