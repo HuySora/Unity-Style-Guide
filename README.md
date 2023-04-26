@@ -103,7 +103,7 @@ Assets
 │   │       └── Level1
 │   │           ├── Level1.unity
 │   │           └── Level1Extension.unity
-│   ├── Blueprints
+│   ├── DataTables
 │   │   ├── Player (Instance objects)
 │   │   │   ├── .fbx .prefab .asset .mp4 .cs
 │   │   │   └── (any other prefab specific asset)
@@ -902,7 +902,7 @@ All meshes in 3ds Max are lowercase to differentiate them from their FBX export.
 | ----------------------- | ---------- | ---------- | ---------------------------------- |
 | Prefab                  |            |            |                                    |
 | Prefab Instance         | I          |            |                                    |
-| Scriptable Object       | *          | *          | Assign "Blueprint" label in Editor |
+| Scriptable Object       | *          | *          | Assign "DataTable" label in Editor |
 
 <a name="anc-materials"></a>
 
