@@ -65,15 +65,19 @@ Variables that are Serializable are shown in the Inspector window in Unity. For 
 There are a few different ways you can name things. Here are some common casing types:
 
 > ##### PascalCase
-> Capitalize every word and remove all spaces, e.g. `DesertEagle`, `StyleGuide`, `ASeriesOfWords`.
+> Capitalize every word and remove all spaces: `DesertEagle`, `StyleGuide`, `ASeriesOfWords`.
 > 
 > ##### camelCase
-> The first letter is always lowercase but every following word starts with uppercase, e.g. `desertEagle`, `styleGuide`, `aSeriesOfWords`.
+> The first letter is always lowercase but every following word starts with uppercase: `desertEagle`, `styleGuide`, `aSeriesOfWords`.
+>
 >  ##### lowercase
-> All letters are lowercase, e.g. `deserteagle`, 
+> All letters are lowercase: `deserteagle`, `styleguide`, `aseriesofwords`.
 >
 > ##### Snake_case
-> Words can arbitrarily start upper or lowercase but words are separated by an underscore, e.g. `desert_Eagle`, `Style_Guide`, `a_Series_of_Words`.
+> All letters are lowercase and separated by an underscore: `desert_eagle`, `style_guide`, `a_series_of_words`.
+>
+> ##### UPPER_SNAKE_CASE
+> All letters are uppercase and separated by an underscore: `DESERT_EAGLE`, `STYLE_GUIDE`, `A_SERIES_OF_WORDS`.
 
 **[⬆ Back to Top](#table-of-contents)**
 
