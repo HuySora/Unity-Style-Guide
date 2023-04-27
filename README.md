@@ -561,11 +561,6 @@ All booleans should be named in PascalCase but prefixed with a verb.
 
 Example: Use `isDead` and `hasItem`, **not** `Dead` and `Item`.
 
-###### Boolean Names
-All booleans should be named as descriptive adjectives when possible if representing general information.
-
-Try to not use verbs such as `isRunning`. Verbs tend to lead to complex states.
-
 ###### Boolean Complex States
 Do not use booleans to represent complex and/or dependent states. This makes state adding and removing complex and no longer easily readable. Use an enumeration instead.
 
