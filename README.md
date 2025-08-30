@@ -68,10 +68,13 @@ There are a few different ways you can name things. Here are some common casing 
 > ##### camelCase
 > The first letter is always lowercase but every following word starts with uppercase, e.g. `desertEagle`, `styleGuide`, `aSeriesOfWords`.
 >  ##### lowercase
-> All letters are lowercase, e.g. `deserteagle`, 
+> All letters are lowercase, e.g. `deserteagle`, `styleguide`, `aseriesofwords`.
 >
 > ##### Snake_case
-> Words can arbitrarily start upper or lowercase but words are separated by an underscore, e.g. `desert_Eagle`, `Style_Guide`, `a_Series_of_Words`.
+> All letters are lowercase and separated by an underscore: `desert_eagle`, `style_guide`, `a_series_of_words`.
+>
+> ##### UPPER_SNAKE_CASE
+> All letters are uppercase and separated by an underscore: `DESERT_EAGLE`, `STYLE_GUIDE`, `A_SERIES_OF_WORDS`.
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -85,71 +88,55 @@ In this style, we will be using a structure that relies more on filtering and se
 
 > IMPORTANT: Development Assets (work in progress or testing assets contained in `_Dev`) should always be prefixed with a `_` to make it easy when configuring things in the inspector
 <pre>
+(Use a `_` to keep folders at the top)
 Assets
-    <a name="#structure-developers">_Dev</a>(Use a `_`to keep this folder at the top)
-        DeveloperName
-            (Work in progress assets)
-    <a name="structure-top-level">ProjectName</a>
-	    Characters
-            	Anakin
-            FX
-	    	Particles
-                Vehicles
-                    Abilities
-                        IonCannon
-                            (Particle Systems, Textures)
-                Weapons
-            Gameplay
-                Characters
-                Equipment
-                Input
-		Triggers
-		Quests
-		Scene
-                Vehicles
-                    Abilities
-                    Air
-                        TieFighter
-                            (Models, Textures, Materials, Prefabs)
-            <a name="#structure-levels">_Levels</a>
-                Frontend
-                Act1
-                    Level1
-            Lighting
-                HDRI
-                Lut
-                Textures
-            MaterialLibrary
-            	Debug
-            	Shaders
-            Objects
-                Architecture (Single use big objects)
-                    DeathStar
-                Props (Repeating objects to fill a level)
-                    ObjectSets
-                        DeathStar
-            Scripts
-                AI
-                Gameplay
-		    Triggers
-		    Quests
-                    Input
-                Tools
-            Sound
-                Characters
-                Vehicles
-                    TieFighter
-                        Abilities
-                            Afterburners
-                Weapons
-            UI
-                Art
-                    Buttons
-                Resources
-                    Fonts
-    ExpansionPack (DLC)
-    Plugins
-    ThirdPartySDK  
+├── <a name="#structure-developers">_Dev</a>
+│   ├── _Levels 
+│   │   ├── Demos_InteractionSystem.unity
+│   │   └── Sandbox.unity
+│   └── DeveloperName
+│       └── (Work in progress assets)
+├── <a name="structure-top-level">_Project</a>
+│   ├── <a name="#structure-levels">_Levels</a>
+│   │   └── Act1
+│   │       └── Level1
+│   │           ├── Level1.unity
+│   │           └── Level1Extension.unity
+│   ├── DataTables
+│   │   ├── Player (Instance objects)
+│   │   │   ├── .fbx .prefab .asset .mp4 .cs
+│   │   │   └── (any other prefab specific asset)
+│   │   ├── NPC
+│   │   │   └── Anakin
+│   │   └── Objects
+│   │       ├── Architecture (Single use big objects)
+│   │       │   └── DeathStar
+│   │       └── Props (Repeating objects to fill a level)
+│   │           └── ObjectSets
+│   │               └── DeathStar
+│   ├── EditorTools (Editor Scripts)
+│   │   ├── Editor
+│   │   └── MonoBehaviours
+│   ├── Lighting
+│   │   ├── HDRI
+│   │   └── Textures
+│   ├── MaterialLibrary
+│   │   ├── Commons
+│   │   └── Shaders
+│   ├── Scripts
+│   ├── Sound
+│   └── UI
+│       ├── Arts
+│       │   └── Icons
+│       ├── Prefabs
+│       ├── Toolkit
+│       │   └── .uxml .uss
+│       └── Resources
+│           └── Fonts
+├── ExpansionPack (DLC)
+├── Plugins
+├── Settings (URP, HDRP, UI Toolkit,...)
+└── ThirdPartySDK
 </pre>
 
 
@@ -215,7 +202,7 @@ If you find that the content browser has an empty folder you can't delete, you s
 <a name="2.2"></a>
 <a name="structure-top-level"><a>
 ### 2.2 Use A Top Level Folder For Project Specific Assets
-All of a project's assets should exist in a folder named after the project. For example, if your project is named 'Generic Shooter', _all_ of it's content should exist in `Assets/GenericShooter`.
+All of a project's assets should exist in a folder named _Project.
 
 > The `Developers` folder is not for assets that your project relies on and therefore is not project specific. See [Developer Folders](#2.3) for details about this.
 
@@ -270,9 +257,9 @@ Once the assets are ready for use, an artist simply has to move the assets into 
 
 <a name="levels"></a>
 ### 2.4 All [Scene](#terms-level-map) Files Belong In A Folder Called Levels
-Level files are incredibly special and it is common for every project to have its own map naming system, especially if they work with sub-levels or streaming levels. No matter what system of map organization is in place for the specific project, all levels should belong in `Assets/ProjectNameName/Levels`.
+Level files are incredibly special and it is common for every project to have its own map naming system, especially if they work with sub-levels or streaming levels. No matter what system of map organization is in place for the specific project, all levels should belong in `Assets/_Project/Levels`.
 
-Being able to tell someone to open a specific map without having to explain where it is is a great time saver and general 'quality of life' improvement. It is common for levels to be within sub-folders of `Levels`, such as `Levels/Campaign1/` or `Levels/Arenas`, but the most important thing here is that they all exist within `Assets/ProjectNameName/Levels`.
+Being able to tell someone to open a specific map without having to explain where it is is a great time saver and general 'quality of life' improvement. It is common for levels to be within sub-folders of `Levels`, such as `Levels/Campaign1/` or `Levels/Arenas`, but the most important thing here is that they all exist within `Assets/_Project/Levels`.
 
 This also simplifies the job of cooking for engineers. Wrangling levels for a build process can be extremely frustrating if they have to dig through arbitrary folders for them. If a team's levels are all in one place, it is much harder to accidentally not cook a map in a build. It also simplifies lighting build scripts as well QA processes.
 
@@ -315,7 +302,7 @@ For example, animations that are shared across multiple characters should lay in
 <a name="structure-material-library"></a>
 ### 2.8 `MaterialLibrary`
 
-If your project makes use of master materials, layered materials, or any form of reusable materials or textures that do not belong to any subset of assets, these assets should be located in `Assets/ProjectName/MaterialLibrary`.
+If your project makes use of master materials, layered materials, or any form of reusable materials or textures that do not belong to any subset of assets, these assets should be located in `Assets/_Project/MaterialLibrary`.
 
 This way all 'global' materials have a place to live and are easily located.
 
@@ -331,28 +318,19 @@ Any testing or debug materials should be within `MaterialLibrary/Debug`. This al
 Next to the project’s hierarchy, there’s also scene hierarchy. As before, we’ll present you a template. You can adjust it to your needs. Use named empty game objects as scene folders.
 
 <pre>
-@System
-@Debug
-@Management
-@UI
-    Layouts
-Cameras
-Lights
-    Volumes
-Particles
-Sound
-World
-    Global
-    Room1
-        Architecture
-        Terrain
-        Props
-Gameplay
-	Actors
-	Items
-	Triggers
-	Quests
-_Dynamic
+>>> SYSTEM
+ ServiceLocator
+ AudioManager
+>>> CAMERA & UI
+ MainCamera
+ ViewManager (Canvas,...)
+>>> STATIC
+ Houses,...
+ Trees,...
+>>> GAMEPLAY
+ (Core gameplay objects)
+>>> RUNTIME
+ (Game spawning while playing)
 </pre>
 
  - All empty objects should be located at 0,0,0 with default rotation and scale.
@@ -376,6 +354,8 @@ This section will focus on C# classes and their internals. When possible, style 
 
 > 3.4 [Functions](#functions)
 
+> 3.5 [Example](#script-example)
+
 <a name="classorganization"></a>
 ### 3.1 Class Organization
 Source files should contain only one public type, although multiple internal classes are allowed.
@@ -384,76 +364,24 @@ Source files should be given the name of the public class in the file.
 
 Organize namespaces with a clearly defined structure,
 
-Class members should be alphabetized, and grouped into sections:
+Class members should be alphabetized, and grouped into sections (#region if too big):
 * Constant Fields
-* Static Fields
-* Fields
-* Constructors
-* Properties
-* Events / Delegates
-* LifeCycle Methods (Awake, OnEnable, OnDisable, OnDestroy)
-* Public Methods
-* Private Methods
-* Nested types
+* **Static Fields**
+    * (Alphabetized and grouped into sections like instance field)
+* Instance Fields
+    * Delegates, Events
+    * SerializeField (Inspector Exposed)
+    * Properties
+    * Constructors, Injection Method
+    * MonoBehaviour’s Life-cycle Method (Awake, OnEnable, OnDisable, OnDestroy)
+    * Methods
+    * Types
 
-Within each of these groups order by access:
+Within each of these groups order by access (except for property and it backing field which will grouped next to each other)
 * public
 * internal
 * protected
 * private
-```
-namespace ProjectName
-{
-	/// <summary>  
-	/// Brief summary of what the class does
-	/// </summary>
-    public class Account
-    {
-      #region Fields
-      
-      [Tooltip("Public variables set in the Inspector, should have a Tooltip")]
-      public static string BankName;
-      
-	  /// <summary>  
-	  /// They should also have a summary
-	  /// </summary>
-      public static decimal Reserves;
- 
-	  public string BankName;
-	  public const string ShippingType = "DropShip";
-	  
-	  private float _timeToDie;
-	  
-	  #endregion
-	  
-	  #region Properties
-	  
-      public string Number {get; set;}
-      public DateTime DateOpened {get; set;}
-      public DateTime DateClosed {get; set;}
-      public decimal Balance {get; set;}
-            
-	  #endregion
-	 
-	  #region LifeCycle
-	  
-      public Awake()
-      {
-        // ...
-      }
-      
-      #endregion
-	  #region Public Methods
-	  
-      public AddObjectToBank()
-      {
-        // ...
-      }
-      
-      #endregion
-    }
-}
-```
 
 #### Script Templates
 To save some time you can overwrite Unity's default script template with your own  to automatically setup the namespace and regions etc. See this Unity [support](https://support.unity3d.com/hc/en-us/articles/210223733-How-to-customize-Unity-script-templates) article to learn how.
@@ -461,20 +389,6 @@ To save some time you can overwrite Unity's default script template with your ow
 <a name="namespace"></a>
 #### Namespace
 Use a namespace to ensure your scoping of classes/enum/interface/etc won't conflict with existing ones from other namespaces or the global namespace. The project should at minimum use the projects name for the Namespace to prevent conflicts with any imported Third Party assets.
-
-#### All Public Functions Should Have A Summary
-
-Simply, any function that has an access modifier of Public should have its summary filled out. 
-
-```
-/// <summary>
-/// Fire a gun
-/// </summary>
-public void Fire()
-{
-// Fire the gun.
-}
-```
 
 #### Foldout Groups
 If a class has only a small number of variables, Foldout Groups are not required.
@@ -486,14 +400,13 @@ To create Foldout Groups there are 2 options in Unity.
 * The first is to define a `[Serializable] public Class` inside the main class however this can have a performance impact. This allows the use of the same variable name to be shared.
 * The second option is to use the Foldout Group Attribute available with [Odin Inspector](https://odininspector.com/).
 
-```
-[[Serializable](https://docs.unity3d.com/ScriptReference/Serializable.html)]
-public struct PlayerStats
-	{
-        public int MovementSpeed;
-    }
+```cs
+[Serializable] // https://docs.unity3d.com/ScriptReference/Serializable.html
+public struct PlayerStats {
+    public int MovementSpeed;
+}
     
-[FoldoutGroup("Interactable")]
+[FoldoutGroup("Interactable")] // (https://odininspector.com/ ,...)
 public int MovementSpeed = 1;
 ```
 
@@ -513,16 +426,16 @@ End comment text with a period.
 Insert one space between the comment delimiter (//) and the comment text, as shown in the following example.
 
 The // (two slashes) style of comment tags should be used in most situations. Where ever possible, place comments above the code instead of beside it. Here are some examples:
-```
-        // Sample comment above a variable.
-        private int _myInt = 5;
+```cs
+// Sample comment above a variable.
+private int m_Int = 5;
 ```
 
 #### Regions
 The `#region` directive enables you to collapse and hide sections of code in C# files. The ability to hide code selectively makes your files more manageable and easier to read. 
-```
+```cs
 #region "This is the code to be collapsed"
-    Private components As System.ComponentModel.Container
+Private components As System.ComponentModel.Container
 #endregion
 ```
 
@@ -549,9 +462,13 @@ The words `variable` and `property` may be used interchangeably.
 All non-boolean variable names must be clear, unambiguous, and descriptive nouns. 
 
 ##### Case
-All variables use PascalCase unless marked as [private](#privatevariables) which use camelCase. 
+All variables use PascalCase: `public const string PublicKey = "My Public Key";`, unless they are: 
+        
+[local](#localvariables) which use camelCase: `string responsePublicKey;`
 
-Use PascalCase for abbreviations of 4 characters or more (3 chars are both uppercase).
+[private](#privatevariables) which use m_PascalCase: `private const string m_PrivateKey = "My Private Key";`
+
+Use PascalCase for abbreviations
 
 ##### Considered Context
 All variable names must not be redundant with their context as all variable references in the class will always have context.
@@ -590,7 +507,7 @@ Local variables should use camelCase.
 
 ###### Implicitly Typed Local Variables
 Use implicit typing for local variables when the type of the variable is obvious from the right side of the assignment, or when the precise type is not important.
-```
+```cs
 var var1 = "This is clearly a string.";
 var var2 = 27;
 var var3 = Convert.ToInt32(Console.ReadLine());
@@ -600,26 +517,26 @@ for (var i = 0; i < bountyHunterFleets.Length; ++i) {};
 
 Do not use var when the type is not apparent from the right side of the assignment.
 Example
-```
+```cs
 int var4 = ExampleClass.ResultSoFar();
 ```
 
 <a name="privatevariables"></a>
 ##### Private Variables
-Private variables should have a prefix with a underscore `_myVariable` and use camelCase.
+Private variables should have a prefix with a underscore `m_` and use PascalCase after that.
 
 Unless it is known that a variable should only be accessed within the class it is defined and never a child class, do not mark variables as private. Until variables are able to be marked `protected`, reserve private for when you absolutely know you want to restrict child class usage.
 
 ##### Do _Not_ use Hungarian notation
 Do _not_ use Hungarian notation or any other type identification in identifiers
-```
+```cs
 // Correct
-int counter;
-string name;
- 
+public int Counter;
+private string m_Name;
+
 // Avoid
-int iCounter;
-string strName;
+public int iCounter;
+private string strName;
 ```
 
 #### Variables accessible in the Editor
@@ -645,11 +562,6 @@ All booleans should be named in PascalCase but prefixed with a verb.
 
 Example: Use `isDead` and `hasItem`, **not** `Dead` and `Item`.
 
-###### Boolean Names
-All booleans should be named as descriptive adjectives when possible if representing general information.
-
-Try to not use verbs such as `isRunning`. Verbs tend to lead to complex states.
-
 ###### Boolean Complex States
 Do not use booleans to represent complex and/or dependent states. This makes state adding and removing complex and no longer easily readable. Use an enumeration instead.
 
@@ -659,17 +571,15 @@ Example: When defining a weapon, do **not** use `isReloading` and `isEquipping` 
 Enums use PascalCase and use singular names for enums and their values. Exception: bit field enums should be plural. Enums can be placed outside the class space to provide global access.
 
 Example: 
-```
-public enum WeaponType
-{
+```cs
+public enum WeaponType {
     Knife,
     Gun
 }
 
 // Enum can have multiple values
 [Flags]
-public enum Dockings
-{
+public enum Dockings {
 	None = 0,
 	Top = 1,
 }
@@ -685,7 +595,10 @@ Example: Use `Targets`, `Hats`, and `EnemyPlayers`, not `TargetList`, `HatArray`
 ##### Interfaces
 Interfaces are led with a capital `I` then followed with PascalCase.
 
-Example: ```public interface ICanEat { }```
+```cs
+public interface ICanEat { }
+public interface IDamageable { }
+```
 
 <a name="functions"></a>
 ### 3.4 Functions, Events, and Event Dispatchers
@@ -767,6 +680,60 @@ Bad examples:
 
 * `OnData`
 * `OnTarget`
+
+<a name="script-example"></a>
+### 3.5 Script Example
+```cs
+namespace UnityCodingStyle {
+    using System;
+    using System.Collections.Generic;
+
+#if UNITY_EDITOR
+    using UnityEditor;
+    public partial class SerializationManager {
+        /// <summary> Public accessable (editor only) field, properties, event, method,.. should have 'Editor' prefix in their name. </summary>
+        public string Editor_GetSaveFileEncryptKey(string fileName) { /*...*/ }
+
+        private void OnValidate() { /*...*/ }
+        private void OnDrawGizmos() { /*...*/ }
+    }
+#endif
+
+    /// <summary> Brief summary of what the class does. </summary>
+    public partial class SerializationManager : MonoBehaviour {
+        /// <summary> Fields/properties that doesn't clearly explain by it name what it used for or does, should have a summary. </summary>
+        public const string PublicKey = "My Public Key";
+        private const string m_PrivateKey = "My Private Key";
+
+	    /// <summary> Events should have a summary. </summary>
+        public static event Action OnLoadSequenceFinished;
+        public static void Load(string fileName) { /*...*/ }
+
+        // SerializeField (Inspector Exposed)
+        [Tooltip("Inspector variables that doesn't clearly explain what it used for by it name, should have a Tooltip")]
+        [SerializeField] private string m_FileName;
+        public string FileName => m_FileName;
+        [field: SerializeField] public string SavePath { get; private set; }
+
+        // Constructors
+	    [Inject] // (https://github.com/modesttree/Zenject)
+        public void Construct() { /*...*/ }
+
+        // MonoBehaviour’s Life-cycle Method
+        public Awake() { /*...*/ }
+        public Update() { /*...*/ }
+
+        // Methods
+        public Load() { /*...*/ Load_Internal(FileName) }
+        private Load_Internal(string fileName) { /*...*/ }
+
+        // Types
+        public struct SaveData {
+            // ...
+        }
+    }
+}
+```
 
 **[⬆ Back to Top](#table-of-contents)**
 <a name="anc"></a>
@@ -852,27 +819,29 @@ When naming an asset use these tables to determine the prefix and suffix to use 
 <a name="anc-common"></a>
 #### Most Common
 
-| Asset Type              | Prefix     | Suffix     | Notes                            |
-| ----------------------- | ---------- | ---------- | -------------------------------- |
-| Level / Scene           |  *          |            | [Should be in a folder called Levels.](#levels) e.g. `Levels/A4_C17_Parking_Garage.unity` |
-| Level (Persistent)      |            | _P         |                                  |
-| Level (Audio)           |            | _Audio     |                                  |
-| Level (Lighting)        |            | _Lighting  |                                  |
-| Level (Geometry)        |            | _Geo       |                                  |
-| Level (Gameplay)        |            | _Gameplay  |                                  |
-| Prefab                  |        |            |                                  |
-| Probe (Reflection)      | RP_        |            |                                  |
-| Probe (Light)           | LP_        |            |                                  |
-| Volume                  | V_         |            |                                  |
-| Trigger Area            |            | _Trigger   |                                  |
-| Material                | M_         |            |                                  |
-| Static Mesh             | SM_       |            |                                  |
-| Skeletal Mesh           | SK_       |            |                                  |
-| Texture                 | T_         | _?         | See [Textures](#anc-textures)    |
-| Visual Effects          | VFX_       |            |                                  |
-| Particle System         | PS_       |            |                                  |
-| Light                   | L_         |            |                                  |
-| Camera (Cinemachine)    | CM_         |            | Virtual Camera                   |
+| Asset Type              | Prefix       | Suffix     | Notes                         |
+| ----------------------- | ------------ | ---------- | ----------------------------- |
+| Level / Scene           |  *           |            | See [Levels](#levels)         |
+| Level (Demos)           |  Demos_      |            |                               |
+| Level (Persistent)      |  Persistent_ |            |                               |
+| Level (Audio)           |              | _Audio     |                               |
+| Level (Lighting)        |              | _Lighting  |                               |
+| Level (Geometry)        |              | _Geo       |                               |
+| Level (Gameplay)        |              | _Gameplay  |                               |
+| Prefab                  |              |            |                               |
+| Probe (Reflection)      | RP_          |            |                               |
+| Probe (Light)           | LP_          |            |                               |
+| Volume                  | V_           |            |                               |
+| Trigger Area            |              | _Trigger   |                               |
+| Material                | M_           |            |                               |
+| Static Mesh             | SM_          |            |                               |
+| Skeletal / Skinned Mesh | SK_          |            |                               |
+| Texture                 | T_           | _?         | See [Textures](#anc-textures) |
+| Particle System         | PS_          |            |                               |
+| Visual Effect           | VFX_         |            |                               |
+| Shader Graph            | SG_          |            |                               |
+| Light                   | L_           |            |                               |
+| Camera (Cinemachine)    | CM_          |            | Virtual Camera                |
 
 <a name="anc-models"></a>
 
@@ -880,15 +849,15 @@ When naming an asset use these tables to determine the prefix and suffix to use 
 
 PascalCase
 
-| Asset Type    | Prefix | Suffix | Notes |
-| ------------- | ------ | ------ | ----- |
-| Characters    | CH_    |        |       |
-| Vehicles      | VH_    |        |       |
-| Weapons       | WP_    |        |       |
-| Static Mesh   | SM_    |        |       |
-| Skeletal Mesh | SK_    |        |       |
-| Skeleton      | SKEL_  |        |       |
-| Rig           | RIG_   |        |       |
+| Asset Type              | Prefix | Suffix | Notes |
+| ----------------------- | ------ | ------ | ----- |
+| Characters              | CH_    |        |       |
+| Vehicles                | VH_    |        |       |
+| Weapons                 | WP_    |        |       |
+| Static Mesh             | SM_    |        |       |
+| Skeletal / Skinned Mesh | SK_    |        |       |
+| Skeleton                | SKEL_  |        |       |
+| Rig                     | RIG_   |        |       |
 
 #### 4.2.1b 3d Models (3ds Max)
 
@@ -912,56 +881,56 @@ All meshes in 3ds Max are lowercase to differentiate them from their FBX export.
 <a name="anc-ai"></a>
 #### 4.2.3 Artificial Intelligence
 
-| Asset Type              | Prefix     | Suffix     | Notes                            |
-| ----------------------- | ---------- | ---------- | -------------------------------- |
-| AI / NPC                | AI_        |  _NPC          |   *Npc could be pawn of CH_ !AI_                          |
-| Behavior Tree           | BT_      |            |                                  |
-| Blackboard              | BB_       |            |                                  |
-| Decorator               | BTDecorator_ |          |                                  |
-| Service                 | BTService_ |            |                                  |
-| Task                    | BTTask_  |            |                                  |
-| Environment Query       | EQS_     |            |                                  |
-| EnvQueryContext         | EQS_     | Context    |                                  |
+| Asset Type        | Prefix       | Suffix  | Notes                         |
+| ----------------- | ------------ | ------- | ----------------------------- |
+| AI / NPC          | AI_          |  _NPC   | Npc could be pawn of CH_ !AI_ |
+| Behavior Tree     | BT_          |         |                               |
+| Blackboard        | BB_          |         |                               |
+| Decorator         | BTDecorator_ |         |                               |
+| Service           | BTService_   |         |                               |
+| Task              | BTTask_      |         |                               |
+| Environment Query | EQS_         |         |                               |
+| EnvQueryContext   | EQS_         | Context |                               |
 
 <a name="anc-prefab"></a>
 #### 4.2.4 Prefabs
 
-| Asset Type              | Prefix     | Suffix     | Notes                            |
-| ----------------------- | ---------- | ---------- | -------------------------------- |
-| Prefab         |        |            |                                  |
-| Prefab Instance         | I       |            |                                  |
-| Scriptable Object       |     |        | Assigned "Blueprint" label in Editor |
+| Asset Type        | Prefix | Suffix | Notes                                |
+| ----------------- | ------ | ------ | ------------------------------------ |
+| Prefab            |        |        |                                      |
+| Prefab Instance   | I      |        |                                      |
+| Scriptable Object |        |        | Assigned "DataTable" label in Editor |
 
 <a name="anc-materials"></a>
 
 #### 4.2.5 Materials
-| Asset Type        | Prefix | Suffix | Notes |
-| ----------------- | ------ | ------ | ----- |
-| Material          | M_     |        |       |
-| Material Instance | MI_    |        |       |
-| Physical Material | PM_    |        |       |
-| Material Shader Graph | MSG_    |        |       |
+| Asset Type            | Prefix | Suffix | Notes |
+| --------------------- | ------ | ------ | ----- |
+| Material              | M_     |        |       |
+| Material Instance     | MI_    |        |       |
+| Physical Material     | PM_    |        |       |
+| Material Shader Graph | MSG_   |        |       |
 
 <a name="anc-textures"></a>
 
 #### 4.2.6 Textures
-| Asset Type              | Prefix     | Suffix     | Notes                            |
-| ----------------------- | ---------- | ---------- | -------------------------------- |
-| Texture                 | T_         |            |                                  |
-| Texture (Base Color)    | T_         | _BC         | Diffuse / Albedo     	       |
-| Texture (Metallic / Smoothness)| T_  | _MS        |                                  |
-| Texture (Normal)        | T_         | _N         |                                  |
-| Texture (Alpha)         | T_         | _A         |                                  |
-| Texture (Height)          | T_         | _H         |                                  |
-| Texture (Ambient Occlusion) | T_     | _AO      |                                  |
-| Texture (Emissive)      | T_         | _E         |                                  |
-| Texture (Mask)          | T_         | _M         |                                  |
-| Texture (Packed)        | T_         | _*         | See notes below about [packing](#anc-textures-packing). |
-| Texture Cube            | TC_       |            |                                  |
-| Media Texture           | MT_       |            |                                  |
-| Render Target           | RT_       |            |                                  |
-| Cube Render Target      | RTC_     |            |                                  |
-| Texture Light Profile   | TLP_     |            |                                  |
+| Asset Type                      | Prefix | Suffix | Notes                                                   |
+| ------------------------------- | ------ | ------ | ------------------------------------------------------- |
+| Texture                         | T_     |        |                                                         |
+| Texture (Base Color)            | T_     | _BC    | Diffuse / Albedo     	                                  |
+| Texture (Metallic / Smoothness) | T_     | _MS    |                                                         |
+| Texture (Normal)                | T_     | _N     |                                                         |
+| Texture (Alpha)                 | T_     | _A     |                                                         |
+| Texture (Height)                | T_     | _H     |                                                         |
+| Texture (Ambient Occlusion)     | T_     | _AO    |                                                         |
+| Texture (Emissive)              | T_     | _E     |                                                         |
+| Texture (Mask)                  | T_     | _M     |                                                         |
+| Texture (Packed)                | T_     | _*     | See notes below about [packing](#anc-textures-packing). |
+| Texture Cube                    | TC_    |        |                                                         |
+| Media Texture                   | MT_    |        |                                                         |
+| Render Target                   | RT_    |        |                                                         |
+| Cube Render Target              | RTC_   |        |                                                         |
+| Texture Light Profile           | TLP_   |        |                                                         |
 
 <a name="anc-textures-packing"></a>
 
@@ -993,11 +962,11 @@ Packing 4 channels of data into a texture (RGBA) is not recommended except for a
 
 #### 4.2.9 Audio
 
-| Asset Type     | Prefix | Suffix | Notes                                                        |
-| -------------- | ------ | ------ | ------------------------------------------------------------ |
-| Audio Clip     | A_     |        |                                                              |
-| Audio Mixer    | MIX_   |        |                                                              |
-| Dialogue Voice | DV_    |        |                                                              |
+| Asset Type     | Prefix | Suffix | Notes                                                           |
+| -------------- | ------ | ------ | --------------------------------------------------------------- |
+| Audio Clip     | A_     |        |                                                                 |
+| Audio Mixer    | MIX_   |        |                                                                 |
+| Dialogue Voice | DV_    |        |                                                                 |
 | Audio Class    |        |        | No prefix/suffix. Should be put in a folder called AudioClasses |
 
 <a name="anc-ui"></a>
@@ -1012,6 +981,8 @@ Packing 4 channels of data into a texture (RGBA) is not recommended except for a
 | Asset Type      | Prefix | Suffix | Notes |
 | --------------- | ------ | ------ | ----- |
 | Particle System | PS_    |        |       |
+| Visual Effect   | VFX_   |        |       |
+| Shader Graph    | SG_    |        |       |
 **[⬆ Back to Top](#table-of-contents)**
 
 <a name="asset-workflows"></a>
