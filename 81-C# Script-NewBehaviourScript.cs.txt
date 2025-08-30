@@ -1,0 +1,28 @@
+#ROOTNAMESPACEBEGIN#
+    using UnityEngine;
+
+#if UNITY_EDITOR
+    using UnityEditor;
+
+    public partial class #SCRIPTNAME# {
+    }
+#endif
+
+    public partial class #SCRIPTNAME# : MonoBehaviour {
+        // Constants
+        #region Static
+        // Delegates, Events
+        // Properties
+        // Constructor
+        // Methods
+        #endregion
+        
+        // Delegates, Events
+        // Properties
+        // Constructor, Injection Method
+        // MonoBehaviour Callbacks
+        // Methods
+        // Types
+    }
+#ROOTNAMESPACEEND#
+
